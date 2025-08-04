@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import "./Header.css"
 import SearchBar from "./SearchBar"
 
@@ -9,9 +9,15 @@ export default function Header() {
       <div className="header-content" style={{ position: "relative" }}>
         <div className="logo">FILM APP</div>
         <nav className="nav-links">
-          <Link to="/">Home</Link>
-          <Link to="/movies">Movies</Link>
-          <Link to="/about">About</Link>
+          <NavLink to="/" end className={({ isActive }) => (isActive ? "active" : "")}>
+            Home
+          </NavLink>
+          <NavLink to="/movies" className={({ isActive }) => (isActive ? "active" : "")}>
+            Favorites
+          </NavLink>
+          <NavLink to="/about" className={({ isActive }) => (isActive ? "active" : "")}>
+            About
+          </NavLink>
         </nav>
         <SearchBar />
       </div>

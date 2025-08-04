@@ -3,7 +3,7 @@ import Header from "../components/Header"
 import Footer from "../components/Footer"
 import "./Home.css"
 
-const API_KEY = "19d8eb16e213b200c85a81e1c09fdabc"
+const API_KEY = import.meta.env.VITE_API_KEY
 
 export default function Home() {
   const [topMovies, setTopMovies] = useState([])

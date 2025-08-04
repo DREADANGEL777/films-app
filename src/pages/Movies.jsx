@@ -1,7 +1,15 @@
 import React from "react"
+import Header from "../components/Header"
+import Footer from "../components/Footer"
 
 export default function Movies() {
   return (
-    <div style={{ padding: "80px", color: "black" }}>Movie search results will be shown here.</div>
+    <div>
+      <Header />
+
+      <div>Movie search results will be shown here.</div>
+
+      <Footer />
+    </div>
   )
 }
