@@ -1,28 +1,15 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
+import { useFavorites } from "../context/FavoritesContext"
 import "./Movies.css"
 
 export default function Movies() {
-  const [favorites, setFavorites] = useState([])
-
-  useEffect(() => {
-    const stored = localStorage.getItem("favorites")
-    if (stored) {
-      setFavorites(JSON.parse(stored))
-    }
-  }, [])
-
-  const removeFromFavorites = (id) => {
-    const updated = favorites.filter((movie) => movie.id !== id)
-    setFavorites(updated)
-    localStorage.setItem("favorites", JSON.stringify(updated))
-  }
+  const { favorites, removeFromFavorites } = useFavorites()
 
   return (
     <div className="favorites">
       <Header />
-
       <div className="favorites-page">
         <h1>Your Favorite Movies</h1>
         {favorites.length === 0 ? (
@@ -35,7 +22,6 @@ export default function Movies() {
                   src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
                   alt={movie.title}
                 />
-
                 <h3 className="movie-name">{movie.title}</h3>
                 <button className="remove-btn" onClick={() => removeFromFavorites(movie.id)}>
                   Remove
@@ -45,7 +31,6 @@ export default function Movies() {
           </div>
         )}
       </div>
-
       <Footer />
     </div>
   )

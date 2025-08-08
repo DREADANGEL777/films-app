@@ -8,7 +8,23 @@ export default function MovieDetails() {
   const { id } = useParams()
   const [movie, setMovie] = useState(null)
   const [error, setError] = useState("")
+  const [favorites, setFavorites] = useState(() => {
+    const stored = localStorage.getItem("favorites")
+    return stored ? JSON.parse(stored) : []
+  })
+
   const API_KEY = import.meta.env.VITE_API_KEY
+
+  const isFavorite = movie && favorites.some((m) => m.id === movie.id)
+
+  const toggleFavorite = () => {
+    if (!movie) return
+
+    const updated = isFavorite ? favorites.filter((m) => m.id !== movie.id) : [...favorites, movie]
+
+    setFavorites(updated)
+    localStorage.setItem("favorites", JSON.stringify(updated))
+  }
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -40,12 +56,7 @@ export default function MovieDetails() {
           ) : (
             <p className="text">Poster: Data don't exist</p>
           )}
-
-          {movie?.title ? (
-            <h2 className="movie-title">{movie.title}</h2>
-          ) : (
-            <p className="text">Title: Data don't exist</p>
-          )}
+          <h2 className="movie-title">{movie.title}</h2>
         </div>
 
         <div className="movie-cont-2">
@@ -100,6 +111,16 @@ export default function MovieDetails() {
               ? movie.production_companies.map((pc) => pc.name).join(", ")
               : "Data don't exist"}
           </p>
+          {movie?.title && (
+            <>
+              <button
+                className={`favorite-btn ${isFavorite ? "added" : ""}`}
+                onClick={toggleFavorite}
+              >
+                {isFavorite ? "Added to Favorites" : "Add to Favorites"}
+              </button>
+            </>
+          )}
         </div>
       </div>
       <Footer />

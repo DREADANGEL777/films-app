@@ -63,7 +63,9 @@ export default function SearchBar() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <button onClick={handleSearch}>Search</button>
+        <button className="search-bar-btn" onClick={handleSearch}>
+          Search
+        </button>
       </div>
 
       {showResults && (

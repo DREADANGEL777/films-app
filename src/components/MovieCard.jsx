@@ -1,18 +1,31 @@
 import React from "react"
 import { useNavigate } from "react-router-dom"
+import { FaHeart, FaRegHeart } from "react-icons/fa"
+import { useFavorites } from "../context/FavoritesContext"
 import "./MovieCard.css"
 
 export default function MovieCard({ movie }) {
   const navigate = useNavigate()
+  const { favorites, toggleFavorite } = useFavorites()
+
+  const isFavorite = favorites.some((fav) => fav.id === movie.id)
 
   const handleClick = () => {
     navigate(`/movie/${movie.id}`)
   }
-  
+
+  const handleFavorite = (e) => {
+    e.stopPropagation()
+    toggleFavorite(movie)
+  }
+
   return (
     <div className="movie-card" onClick={handleClick}>
       <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
       <h4>{movie.title}</h4>
+      <button className="favorites-btn" onClick={handleFavorite}>
+        {isFavorite ? <FaHeart color="red" /> : <FaRegHeart color="white" />}
+      </button>
     </div>
   )
 }

@@ -9,10 +9,6 @@ export default function Home() {
   const [topMovies, setTopMovies] = useState([])
   const [index, setIndex] = useState(0)
   const [countdown, setCountdown] = useState(10)
-  const [favorites, setFavorites] = useState(() => {
-    const stored = localStorage.getItem("favorites")
-    return stored ? JSON.parse(stored) : []
-  })
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -36,22 +32,6 @@ export default function Home() {
 
   const currentMovie = topMovies[index]
 
-  const isFavorite = currentMovie && favorites.some((m) => m.id === currentMovie.id)
-
-  const toggleFavorite = () => {
-    if (!currentMovie) return
-
-    let updatedFavorites
-    if (isFavorite) {
-      updatedFavorites = favorites.filter((m) => m.id !== currentMovie.id)
-    } else {
-      updatedFavorites = [...favorites, currentMovie]
-    }
-
-    setFavorites(updatedFavorites)
-    localStorage.setItem("favorites", JSON.stringify(updatedFavorites))
-  }
-
   return (
     <div className="home-wrapper">
       <div
@@ -64,12 +44,7 @@ export default function Home() {
 
         <h1 className="title-box">{currentMovie?.title}</h1>
 
-        <div className="home-controls">
-          <div className="countdown-circle">{countdown}</div>
-          <button className={`favorite-btn ${isFavorite ? "added" : ""}`} onClick={toggleFavorite}>
-            {isFavorite ? "Added" : "Add to Favorites"}
-          </button>
-        </div>
+        <div className="countdown-circle">{countdown}</div>
 
         <Footer />
       </div>
