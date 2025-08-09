@@ -2,6 +2,7 @@ import React from "react"
 import { useNavigate } from "react-router-dom"
 import { FaHeart, FaRegHeart } from "react-icons/fa"
 import { useFavorites } from "../context/FavoritesContext"
+import placeholderImage from "../assets/placeholder.webp"
 import "./MovieCard.css"
 
 export default function MovieCard({ movie }) {
@@ -21,10 +22,22 @@ export default function MovieCard({ movie }) {
 
   return (
     <div className="movie-card" onClick={handleClick}>
-      <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
+      <img
+        className="movie-img"
+        src={
+          movie.poster_path
+            ? `https://image.tmdb.org/t/p/w200${movie.poster_path}`
+            : placeholderImage
+        }
+        alt={movie.title}
+        onError={(e) => {
+          e.target.onerror = null
+          e.target.src = placeholderImage
+        }}
+      />
       <h4>{movie.title}</h4>
       <button className="favorites-btn" onClick={handleFavorite}>
-        {isFavorite ? <FaHeart color="red" /> : <FaRegHeart color="white" />}
+        {isFavorite ? <FaHeart color="red" /> : <FaRegHeart color="red" />}
       </button>
     </div>
   )

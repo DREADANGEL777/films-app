@@ -29,6 +29,11 @@
   width: 70%;
 }
 
+.movie-detail-img {
+  width: 300px;
+  min-height: 400px;
+}
+
 .movie-title {
   color: #fff;
   text-align: center;

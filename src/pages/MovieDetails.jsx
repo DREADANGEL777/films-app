@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
+import placeholderImage from "../assets/placeholder.webp"
 import "./MovieDetails.css"
 
 export default function MovieDetails() {
@@ -19,9 +20,7 @@ export default function MovieDetails() {
 
   const toggleFavorite = () => {
     if (!movie) return
-
     const updated = isFavorite ? favorites.filter((m) => m.id !== movie.id) : [...favorites, movie]
-
     setFavorites(updated)
     localStorage.setItem("favorites", JSON.stringify(updated))
   }
@@ -36,7 +35,6 @@ export default function MovieDetails() {
         setError("Failed to load movie details")
       }
     }
-
     fetchMovie()
   }, [id])
 
@@ -48,14 +46,19 @@ export default function MovieDetails() {
       <Header />
       <div className="movie-detail-inner">
         <div className="movie-cont-1">
-          {movie?.poster_path ? (
-            <img
-              src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-              alt={movie.title || "No title"}
-            />
-          ) : (
-            <p className="text">Poster: Data don't exist</p>
-          )}
+          <img
+            className="movie-detail-img"
+            src={
+              movie?.poster_path
+                ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
+                : placeholderImage
+            }
+            alt={movie?.title || "No title"}
+            onError={(e) => {
+              e.target.onerror = null
+              e.target.src = placeholderImage
+            }}
+          />
           <h2 className="movie-title">{movie.title}</h2>
         </div>
 
@@ -111,15 +114,14 @@ export default function MovieDetails() {
               ? movie.production_companies.map((pc) => pc.name).join(", ")
               : "Data don't exist"}
           </p>
+
           {movie?.title && (
-            <>
-              <button
-                className={`favorite-btn ${isFavorite ? "added" : ""}`}
-                onClick={toggleFavorite}
-              >
-                {isFavorite ? "Added to Favorites" : "Add to Favorites"}
-              </button>
-            </>
+            <button
+              className={`favorite-btn ${isFavorite ? "added" : ""}`}
+              onClick={toggleFavorite}
+            >
+              {isFavorite ? "Added to Favorites" : "Add to Favorites"}
+            </button>
           )}
         </div>
       </div>

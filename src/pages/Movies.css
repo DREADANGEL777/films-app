@@ -28,12 +28,12 @@
   justify-content: flex-start;
   border: 0.5px solid #fff;
   border-radius: 15px;
- 
 }
 
-.favorite-card img {
+.favorites-img {
   width: 100%;
   border-radius: 8px;
+  min-height: 400px;
 }
 
 .movie-name {
