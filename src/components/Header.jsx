@@ -1,5 +1,5 @@
-import React from "react"
 import { NavLink } from "react-router-dom"
+
 import "./Header.css"
 import SearchBar from "./SearchBar"
 
@@ -17,6 +17,9 @@ export default function Header() {
           </NavLink>
           <NavLink to="/about" className={({ isActive }) => (isActive ? "active" : "")}>
             About
+          </NavLink>
+          <NavLink to="/pagination" className={({ isActive }) => (isActive ? "active" : "")}>
+            Pagination
           </NavLink>
         </nav>
         <SearchBar />

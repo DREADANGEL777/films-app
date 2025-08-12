@@ -1,0 +1,144 @@
+.pagination {
+  min-height: 100vh;
+  background-color: #101820;
+  color: #ffcc00;
+}
+
+.pagination-inner {
+  padding: 20px;
+  padding: 100px 50px;
+}
+
+.pagination-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.movie-card {
+  background-color: rgba(0, 0, 0, 0.7);
+  border: 1px solid #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: center;
+  padding: 10px;
+  color: #ffcc00;
+  transition: transform 0.2s ease;
+}
+
+.movie-img {
+  width: 50px;
+  min-height: 70px;
+  max-height: 70px;
+  height: auto;
+  border-radius: 5px;
+}
+
+.movie-card h3 {
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+}
+
+.pag-cont {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.pag-btn {
+  cursor: pointer;
+  border-radius: 5px;
+  border: 0;
+  outline: 0;
+  padding: 10px 20px;
+  color: #ffcc00;
+  font-family: "poppins";
+  font-weight: 700;
+  border: 1px solid #fff;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.pag-btn:disabled {
+  border-radius: 5px;
+  border: 0;
+  outline: 0;
+  padding: 10px 20px;
+  border: 1px solid #fff;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  font-family: "poppins";
+  font-weight: 700;
+  cursor: not-allowed;
+}
+
+.page-button {
+  border-radius: 5px;
+  border: 0;
+  outline: 0;
+  padding: 10px 15px;
+  border: 1px solid #fff;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #ffcc00;
+  font-family: "poppins";
+  font-weight: 700;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.page-button:hover {
+  border-radius: 5px;
+  border: 0;
+  outline: 0;
+  padding: 10px 15px;
+  border: 1px solid #fff;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #ffcc00;
+  scale: 1.15;
+  font-family: "poppins";
+  font-weight: 700;
+}
+
+.active-page {
+  border-radius: 5px;
+  border: 0;
+  outline: 0;
+  padding: 10px 15px;
+  border: 1px solid #fff;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #ffffff;
+  scale: 1.15;
+  font-family: "poppins";
+  font-weight: 700;
+}
+
+@media (max-width: 1024px) {
+  .pagination-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .pagination-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .pagination-grid {
+    grid-template-columns: 1fr;
+  }
+}
