@@ -1,12 +1,11 @@
 import { NavLink } from "react-router-dom"
-
 import "./Header.css"
 import SearchBar from "./SearchBar"
 
 export default function Header() {
   return (
     <header className="header">
-      <div className="header-content" style={{ position: "relative" }}>
+      <div className="container header-content" style={{ position: "relative" }}>
         <div className="logo">FILM APP</div>
         <nav className="nav-links">
           <NavLink to="/" end className={({ isActive }) => (isActive ? "active" : "")}>
@@ -19,7 +18,7 @@ export default function Header() {
             About
           </NavLink>
           <NavLink to="/pagination" className={({ isActive }) => (isActive ? "active" : "")}>
-            Pagination
+            Movie list
           </NavLink>
         </nav>
         <SearchBar />

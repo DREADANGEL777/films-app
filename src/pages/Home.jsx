@@ -42,9 +42,10 @@ export default function Home() {
       >
         <Header />
 
-        <h1 className="title-box">{currentMovie?.title}</h1>
-
-        <div className="countdown-circle">{countdown}</div>
+        <div className="container">
+          <h1 className="title-box">{currentMovie?.title}</h1>
+          <div className="countdown-circle">{countdown}</div>
+        </div>
 
         <Footer />
       </div>

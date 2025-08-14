@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import "./Pagination.css"
+import placeholderImage from "../assets/placeholder.webp"
 
 const API_KEY = import.meta.env.VITE_API_KEY
 
@@ -97,14 +98,14 @@ const MoviesPagination = () => {
                 <img
                   className="movie-img"
                   src={
-                    movie.poster_path
+                    movie?.poster_path
                       ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
-                      : "/placeholder.webp"
+                      : placeholderImage
                   }
-                  alt={movie.title}
+                  alt={movie?.title || "No title"}
                   onError={(e) => {
                     e.target.onerror = null
-                    e.target.src = "/placeholder.webp"
+                    e.target.src = placeholderImage
                   }}
                 />
                 <h3>{movie.title}</h3>
@@ -114,12 +115,18 @@ const MoviesPagination = () => {
         )}
 
         <div className="pagination-controls">
-          <button className="pag-btn" onClick={() => onPageChange(1)} disabled={page === 1}>
-            START
-          </button>
-          <button className="pag-btn" onClick={() => onPageChange(page - 1)} disabled={page === 1}>
-            PREV
-          </button>
+          <div>
+            <button className="pag-btn" onClick={() => onPageChange(1)} disabled={page === 1}>
+              START
+            </button>
+            <button
+              className="pag-btn"
+              onClick={() => onPageChange(page - 1)}
+              disabled={page === 1}
+            >
+              PREV
+            </button>
+          </div>
 
           <div className="pag-cont">
             {arrPages.map((item, idx) => {
@@ -142,21 +149,22 @@ const MoviesPagination = () => {
               )
             })}
           </div>
-
-          <button
-            className="pag-btn"
-            onClick={() => onPageChange(page + 1)}
-            disabled={page === totalPages}
-          >
-            NEXT
-          </button>
-          <button
-            className="pag-btn"
-            onClick={() => onPageChange(totalPages)}
-            disabled={page === totalPages}
-          >
-            END
-          </button>
+          <div>
+            <button
+              className="pag-btn"
+              onClick={() => onPageChange(page + 1)}
+              disabled={page === totalPages}
+            >
+              NEXT
+            </button>
+            <button
+              className="pag-btn"
+              onClick={() => onPageChange(totalPages)}
+              disabled={page === totalPages}
+            >
+              END
+            </button>
+          </div>
         </div>
       </div>
 

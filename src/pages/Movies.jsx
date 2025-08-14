@@ -13,8 +13,8 @@ export default function Movies() {
   return (
     <div className="favorites">
       <Header />
-      <div className="favorites-page">
-        <h1>Your Favorite Movies</h1>
+      <div className="favorites-page container">
+        <h1 className="favorites-main-title">Your Favorite Movies</h1>
         {favorites.length === 0 ? (
           <p>No favorite movies yet.</p>
         ) : (

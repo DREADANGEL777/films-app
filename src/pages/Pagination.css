@@ -5,7 +5,8 @@
 }
 
 .pagination-inner {
-  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
   padding: 100px 50px;
 }
 
@@ -24,6 +25,9 @@
   padding: 10px;
   color: #ffcc00;
   transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .movie-img {
@@ -60,37 +64,27 @@
 }
 
 .pag-btn {
+  margin: 10px;
   cursor: pointer;
   border-radius: 5px;
-  border: 0;
-  outline: 0;
+  border: 1px solid #fff;
   padding: 10px 20px;
   color: #ffcc00;
   font-family: "poppins";
   font-weight: 700;
-  border: 1px solid #fff;
   background-color: rgba(0, 0, 0, 0.7);
 }
 
 .pag-btn:disabled {
-  border-radius: 5px;
-  border: 0;
-  outline: 0;
-  padding: 10px 20px;
-  border: 1px solid #fff;
   background-color: rgba(0, 0, 0, 0.3);
   color: #fff;
-  font-family: "poppins";
-  font-weight: 700;
   cursor: not-allowed;
 }
 
 .page-button {
   border-radius: 5px;
-  border: 0;
-  outline: 0;
-  padding: 10px 15px;
   border: 1px solid #fff;
+  padding: 10px 15px;
   background-color: rgba(0, 0, 0, 0.7);
   color: #ffcc00;
   font-family: "poppins";
@@ -100,34 +94,31 @@
 }
 
 .page-button:hover {
-  border-radius: 5px;
-  border: 0;
-  outline: 0;
-  padding: 10px 15px;
-  border: 1px solid #fff;
-  background-color: rgba(0, 0, 0, 0.7);
-  color: #ffcc00;
   scale: 1.15;
-  font-family: "poppins";
-  font-weight: 700;
 }
 
 .active-page {
-  border-radius: 5px;
-  border: 0;
-  outline: 0;
-  padding: 10px 15px;
-  border: 1px solid #fff;
-  background-color: rgba(0, 0, 0, 0.7);
   color: #ffffff;
   scale: 1.15;
-  font-family: "poppins";
-  font-weight: 700;
 }
 
 @media (max-width: 1024px) {
   .pagination-grid {
     grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 950px) {
+  .pag-btn,
+  .page-button {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 800px) {
+  .pagination-inner {
+    padding: 200px 50px 60px;
   }
 }
 
@@ -137,8 +128,35 @@
   }
 }
 
+@media (max-width: 740px) {
+  .pagination-controls {
+    flex-wrap: wrap;
+  }
+}
+
 @media (max-width: 480px) {
   .pagination-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 450px) {
+  .pagination-inner {
+    padding: 200px 15px 60px;
+  }
+
+  .movie-card h3 {
+    font-size: 14px;
+  }
+
+  .pag-btn,
+  .page-button {
+    padding: 3px 6px;
+    font-size: 8px;
+  }
+
+  .movie-img {
+    width: 40px;
+    max-height: 60px;
   }
 }

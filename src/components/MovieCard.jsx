@@ -21,9 +21,9 @@ export default function MovieCard({ movie }) {
   }
 
   return (
-    <div className="movie-card" onClick={handleClick}>
+    <div className="movie-card-detail" onClick={handleClick}>
       <img
-        className="movie-img"
+        className="movie-img-detail"
         src={
           movie.poster_path
             ? `https://image.tmdb.org/t/p/w200${movie.poster_path}`
@@ -36,7 +36,7 @@ export default function MovieCard({ movie }) {
         }}
       />
       <h4>{movie.title}</h4>
-      <button className="favorites-btn" onClick={handleFavorite}>
+      <button className="favorites-btn-detail" onClick={handleFavorite}>
         {isFavorite ? <FaHeart color="red" /> : <FaRegHeart color="red" />}
       </button>
     </div>

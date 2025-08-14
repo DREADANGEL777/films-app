@@ -2,10 +2,22 @@
   position: fixed;
   bottom: 0;
   width: 100%;
-  text-align: center;
   backdrop-filter: blur(6px);
   background: rgba(0, 0, 0, 0.2);
-  padding: 15px;
+  padding: 15px 0;
   color: white;
   border-top: 0.5px solid #fff;
+  text-align: center;
+}
+
+.container {
+  width: 90%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+@media (max-width: 320px) {
+  .footer p {
+    font-size: 12px;
+  }
 }
