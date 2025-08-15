@@ -76,4 +76,7 @@
     padding: 8px;
     font-size: 12px;
   }
+  .search-result {
+    max-height: 340px;
+  }
 }

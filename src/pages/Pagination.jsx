@@ -47,7 +47,7 @@ const MoviesPagination = () => {
 
   const renderPagination = () => {
     const pages = []
-    const groupSize = 4
+    const groupSize = 3
     const lastGroupStart = Math.max(totalPages - groupSize + 1, 1)
     const currentGroupStart = Math.floor((page - 1) / groupSize) * groupSize + 1
     const currentGroupEnd = Math.min(currentGroupStart + groupSize, totalPages)
