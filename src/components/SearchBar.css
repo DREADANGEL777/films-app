@@ -9,6 +9,11 @@
   border-radius: 5px;
 }
 
+.input-group {
+  display: flex;
+  flex-direction: row;
+}
+
 .search-bar input {
   outline: none;
   padding: 8px;
