@@ -80,6 +80,9 @@
     border-radius: 5px;
     width: 240px;
   }
+  .input-group {
+    width: 230px;
+  }
   .search-bar input {
     padding: 8px;
     font-size: 12px;
