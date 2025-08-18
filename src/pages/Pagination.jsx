@@ -13,8 +13,18 @@ const MoviesPagination = () => {
   const [loading, setLoading] = useState(false)
   const [arrPages, setArrPages] = useState([])
   const [totalPages, setTotalPages] = useState(1)
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 400)
 
   const navigate = useNavigate()
+
+  // check screen size
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 400)
+    }
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -115,56 +125,94 @@ const MoviesPagination = () => {
         )}
 
         <div className="pagination-controls">
-          <div>
-            <button className="pag-btn" onClick={() => onPageChange(1)} disabled={page === 1}>
-              START
-            </button>
-            <button
-              className="pag-btn"
-              onClick={() => onPageChange(page - 1)}
-              disabled={page === 1}
-            >
-              PREV
-            </button>
-          </div>
+          {isMobile ? (
+            
+            <div className="mobile-pagination">
+              <button className="pag-btn-new" onClick={() => onPageChange(1)} disabled={page === 1}>
+                {"<<"}
+              </button>
+              <button
+                className="pag-btn-new"
+                onClick={() => onPageChange(page - 1)}
+                disabled={page === 1}
+              >
+                {"<"}
+              </button>
 
-          <div className="pag-cont">
-            {arrPages.map((item, idx) => {
-              if (item === "dots") {
-                return (
-                  <button key={`dots-${idx}`} className="page-button dots">
-                    ...
-                  </button>
-                )
-              }
-              const pageNum = Number(item)
-              return (
-                <button
-                  key={item}
-                  onClick={() => onPageChange(pageNum)}
-                  className={`page-button ${page === pageNum ? "active-page" : ""}`}
-                >
-                  {item}
+              <span className="page-info-new">
+                {page} from {totalPages}
+              </span>
+
+              <button
+                className="pag-btn-new"
+                onClick={() => onPageChange(page + 1)}
+                disabled={page === totalPages}
+              >
+                {">"}
+              </button>
+              <button
+                className="pag-btn-new"
+                onClick={() => onPageChange(totalPages)}
+                disabled={page === totalPages}
+              >
+                {">>"}
+              </button>
+            </div>
+          ) : (
+            
+            <>
+              <div>
+                <button className="pag-btn" onClick={() => onPageChange(1)} disabled={page === 1}>
+                  START
                 </button>
-              )
-            })}
-          </div>
-          <div>
-            <button
-              className="pag-btn"
-              onClick={() => onPageChange(page + 1)}
-              disabled={page === totalPages}
-            >
-              NEXT
-            </button>
-            <button
-              className="pag-btn"
-              onClick={() => onPageChange(totalPages)}
-              disabled={page === totalPages}
-            >
-              END
-            </button>
-          </div>
+                <button
+                  className="pag-btn"
+                  onClick={() => onPageChange(page - 1)}
+                  disabled={page === 1}
+                >
+                  PREV
+                </button>
+              </div>
+
+              <div className="pag-cont">
+                {arrPages.map((item, idx) => {
+                  if (item === "dots") {
+                    return (
+                      <button key={`dots-${idx}`} className="page-button dots">
+                        ...
+                      </button>
+                    )
+                  }
+                  const pageNum = Number(item)
+                  return (
+                    <button
+                      key={item}
+                      onClick={() => onPageChange(pageNum)}
+                      className={`page-button ${page === pageNum ? "active-page" : ""}`}
+                    >
+                      {item}
+                    </button>
+                  )
+                })}
+              </div>
+              <div>
+                <button
+                  className="pag-btn"
+                  onClick={() => onPageChange(page + 1)}
+                  disabled={page === totalPages}
+                >
+                  NEXT
+                </button>
+                <button
+                  className="pag-btn"
+                  onClick={() => onPageChange(totalPages)}
+                  disabled={page === totalPages}
+                >
+                  END
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </div>
 

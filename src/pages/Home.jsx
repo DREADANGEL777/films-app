@@ -9,6 +9,7 @@ export default function Home() {
   const [topMovies, setTopMovies] = useState([])
   const [index, setIndex] = useState(0)
   const [countdown, setCountdown] = useState(10)
+  const [loadedImages, setLoadedImages] = useState({})
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -23,21 +24,44 @@ export default function Home() {
       .then((data) => setTopMovies(data.results))
   }, [])
 
+  const preloadImage = (url, movieId) => {
+    const img = new Image()
+    img.src = url
+    img.onload = () => setLoadedImages((prev) => ({ ...prev, [movieId]: true }))
+  }
+
+  useEffect(() => {
+    if (topMovies.length > 0) {
+      topMovies.forEach((movie) => {
+        const url = `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
+        preloadImage(url, movie.id)
+      })
+    }
+  }, [topMovies])
+
   useEffect(() => {
     const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % topMovies.length)
+      setIndex((prev) => {
+        const next = (prev + 1) % topMovies.length
+        return next
+      })
+      setCountdown(10)
     }, 10000)
+
     return () => clearInterval(interval)
   }, [topMovies])
 
   const currentMovie = topMovies[index]
+  const currentLoaded = currentMovie && loadedImages[currentMovie.id]
 
   return (
     <div className="home-wrapper">
       <div
         className="background"
         style={{
-          backgroundImage: `url(https://image.tmdb.org/t/p/original${currentMovie?.backdrop_path})`,
+          backgroundImage: currentLoaded
+            ? `url(https://image.tmdb.org/t/p/original${currentMovie?.backdrop_path})`
+            : "none",
         }}
       >
         <Header />

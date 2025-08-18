@@ -102,6 +102,27 @@
   scale: 1.15;
 }
 
+.pag-btn-new {
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid #fff;
+  padding: 15px;
+  color: #ffcc00;
+  font-family: "poppins";
+  font-weight: 700;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.pag-btn-new:disabled {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  cursor: not-allowed;
+}
+
+.page-info-new {
+}
+
 @media (max-width: 1024px) {
   .pagination-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -197,5 +218,22 @@
   }
   .pag-cont {
     gap: 4px;
+  }
+  .pag-btn-new {
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid #fff;
+    padding: 10px;
+    color: #ffcc00;
+    font-family: "poppins";
+    font-weight: 700;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+
+  .pag-btn-new:disabled {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    cursor: not-allowed;
   }
 }
