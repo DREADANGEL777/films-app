@@ -4,6 +4,7 @@ import Header from "../components/Header"
 import Footer from "../components/Footer"
 import placeholderImage from "../assets/placeholder.webp"
 import "./MovieDetails.css"
+import Loader from "../components/Loader"
 
 export default function MovieDetails() {
   const { id } = useParams()
@@ -39,7 +40,7 @@ export default function MovieDetails() {
   }, [id])
 
   if (error) return <div>{error}</div>
-  if (!movie) return <div>Loading...</div>
+  if (!movie) return <Loader />
 
   return (
     <div className="movie-detail">

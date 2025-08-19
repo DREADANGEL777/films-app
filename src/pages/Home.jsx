@@ -10,6 +10,7 @@ export default function Home() {
   const [index, setIndex] = useState(0)
   const [countdown, setCountdown] = useState(10)
   const [loadedImages, setLoadedImages] = useState({})
+  const [lastBackground, setLastBackground] = useState("")
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -54,14 +55,18 @@ export default function Home() {
   const currentMovie = topMovies[index]
   const currentLoaded = currentMovie && loadedImages[currentMovie.id]
 
+  useEffect(() => {
+    if (currentMovie && currentLoaded) {
+      setLastBackground(`url(https://image.tmdb.org/t/p/original${currentMovie.backdrop_path})`)
+    }
+  }, [currentMovie, currentLoaded])
+
   return (
     <div className="home-wrapper">
       <div
         className="background"
         style={{
-          backgroundImage: currentLoaded
-            ? `url(https://image.tmdb.org/t/p/original${currentMovie?.backdrop_path})`
-            : "none",
+          backgroundImage: lastBackground,
         }}
       >
         <Header />

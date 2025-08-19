@@ -17,7 +17,7 @@ const MoviesPagination = () => {
 
   const navigate = useNavigate()
 
-  // check screen size
+  
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 400)
