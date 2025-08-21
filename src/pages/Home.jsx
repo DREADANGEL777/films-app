@@ -13,44 +13,66 @@ export default function Home() {
   const [lastBackground, setLastBackground] = useState("")
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCountdown((prev) => (prev === 1 ? 10 : prev - 1))
-    }, 1000)
-    return () => clearInterval(timer)
-  }, [])
-
-  useEffect(() => {
     fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`)
       .then((res) => res.json())
       .then((data) => setTopMovies(data.results))
   }, [])
 
   const preloadImage = (url, movieId) => {
+    if (loadedImages[movieId]) return 
     const img = new Image()
     img.src = url
     img.onload = () => setLoadedImages((prev) => ({ ...prev, [movieId]: true }))
   }
 
+  
   useEffect(() => {
     if (topMovies.length > 0) {
-      topMovies.forEach((movie) => {
-        const url = `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
-        preloadImage(url, movie.id)
-      })
+      const url = `https://image.tmdb.org/t/p/original${topMovies[0].backdrop_path}`
+      preloadImage(url, topMovies[0].id)
     }
   }, [topMovies])
 
+  
   useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) => {
-        const next = (prev + 1) % topMovies.length
-        return next
-      })
-      setCountdown(10)
-    }, 10000)
+    const timer = setInterval(() => {
+      setCountdown((prev) => (prev === 1 ? 10 : prev - 1))
+    }, 1000)
+    return () => clearInterval(timer)
+  }, [])
 
-    return () => clearInterval(interval)
-  }, [topMovies])
+  
+  useEffect(() => {
+    if (countdown === 9 && topMovies.length > 0) {
+      const nextIndex = (index + 1) % topMovies.length
+      const nextMovie = topMovies[nextIndex]
+      const url = `https://image.tmdb.org/t/p/original${nextMovie.backdrop_path}`
+      preloadImage(url, nextMovie.id)
+    }
+  }, [countdown, index, topMovies])
+
+  
+  useEffect(() => {
+    if (countdown === 1 && topMovies.length > 0) {
+      const nextIndex = (index + 1) % topMovies.length
+      const nextMovie = topMovies[nextIndex]
+
+      
+      if (loadedImages[nextMovie.id]) {
+        setIndex(nextIndex)
+        setCountdown(10)
+      } else {
+       
+        const checkLoaded = setInterval(() => {
+          if (loadedImages[nextMovie.id]) {
+            setIndex(nextIndex)
+            setCountdown(10)
+            clearInterval(checkLoaded)
+          }
+        }, 200)
+      }
+    }
+  }, [countdown, index, topMovies, loadedImages])
 
   const currentMovie = topMovies[index]
   const currentLoaded = currentMovie && loadedImages[currentMovie.id]
