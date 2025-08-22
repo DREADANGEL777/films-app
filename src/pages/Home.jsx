@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import "./Home.css"
@@ -19,13 +19,12 @@ export default function Home() {
   }, [])
 
   const preloadImage = (url, movieId) => {
-    if (loadedImages[movieId]) return 
+    if (loadedImages[movieId]) return
     const img = new Image()
     img.src = url
     img.onload = () => setLoadedImages((prev) => ({ ...prev, [movieId]: true }))
   }
 
-  
   useEffect(() => {
     if (topMovies.length > 0) {
       const url = `https://image.tmdb.org/t/p/original${topMovies[0].backdrop_path}`
@@ -33,7 +32,6 @@ export default function Home() {
     }
   }, [topMovies])
 
-  
   useEffect(() => {
     const timer = setInterval(() => {
       setCountdown((prev) => (prev === 1 ? 10 : prev - 1))
@@ -41,7 +39,6 @@ export default function Home() {
     return () => clearInterval(timer)
   }, [])
 
-  
   useEffect(() => {
     if (countdown === 9 && topMovies.length > 0) {
       const nextIndex = (index + 1) % topMovies.length
@@ -51,18 +48,15 @@ export default function Home() {
     }
   }, [countdown, index, topMovies])
 
-  
   useEffect(() => {
     if (countdown === 1 && topMovies.length > 0) {
       const nextIndex = (index + 1) % topMovies.length
       const nextMovie = topMovies[nextIndex]
 
-      
       if (loadedImages[nextMovie.id]) {
         setIndex(nextIndex)
         setCountdown(10)
       } else {
-       
         const checkLoaded = setInterval(() => {
           if (loadedImages[nextMovie.id]) {
             setIndex(nextIndex)
