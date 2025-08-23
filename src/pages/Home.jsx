@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import "./Home.css"
+import placeHolder from '../assets/placeholder.webp'
 
 const API_KEY = import.meta.env.VITE_API_KEY
 
